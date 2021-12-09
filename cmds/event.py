@@ -18,12 +18,7 @@ class Event(Cog_Extension):
         content = msg.content
         message_channel = msg.channel.id
         #check onedrive
-        face_stack = {'數字人':556416924645588992 , 
-                                    '布里阿布':395199000640225281, 
-                                    '綿羊': 792664737837875200, 
-                                    '沝阿水': 527396560116383761,
-                                    '東東':637620548054155266,
-                                    '微微':917655744046825492}
+        face_stack = {}
 
         if msg.channel.id==914780104704536576:
             if ("one" in msg.content) and (msg.author != self.bot.user):
