@@ -1,4 +1,4 @@
-import discord, random, json, datetime, asyncio
+import discord, random, json, datetime, asyncio, os
 from discord.ext import commands
 from core.classes import Cog_Extension
 from random import randint
@@ -18,7 +18,18 @@ class Event(Cog_Extension):
         content = msg.content
         message_channel = msg.channel.id
         #check onedrive
-        face_stack = {}
+        face_stack = {'數字人':556416924645588992 , 
+                        '布里阿布':395199000640225281, 
+                        '綿羊': 792664737837875200, 
+                        '沝阿水': 527396560116383761,
+                        '東東':637620548054155266,
+                        '微微':480388351166382124,
+                        '回鍋':855814708811399189,
+                        '阿如':531100369334304798,
+                        'CM':725714853872009216,
+                        '赤冥':541279740414263308,
+                        '謎漾':553145654130507776,
+                        '右手':539792067245768704}
 
         if msg.channel.id==914780104704536576:
             if ("one" in msg.content) and (msg.author != self.bot.user):
@@ -45,15 +56,25 @@ class Event(Cog_Extension):
                 await msg.delete()
             
             elif msg.content=="煞氣幫" and (916322200976511066 in [y.id for y in user.roles])==True and msg.author != self.bot.user:
-                list = random.choice(['請開始歌頌龐董贊歌 玉樹臨風 瀟灑倜儻...', '我龐董說甚麼都是對的 你們通通下去'])
+                list = random.choice(['請開始歌頌龐董贊歌 玉樹臨風 瀟灑倜儻...', '我龐董說甚麼都是對的 你們通通下去' ,'感謝龐董又幫台灣GDP上升了幾個百分點'])
                 await msg.channel.send(list)
                 await asyncio.sleep(5)
-                await msg.delete()
 
             if msg.content=="我要加入煞氣幫" and (msg.author.id !=859450432480608267):
                 var = discord.utils.get(msg.guild.roles, name = "煞氣幫")
                 await msg.author.add_roles(var)
                 await msg.channel.send(f"<@859450432480608267>幫主!! <@{user_id}>剛剛加入<@&916322200976511066>了")
+            
+            elif (len(msg.content)==7) and (msg.author.id !=859450432480608267):
+                if ("我要加" in msg.content) and ("幫" in msg.content):
+                    var = discord.utils.get(msg.guild.roles, name = "煞氣幫")
+                    await msg.author.add_roles(var)
+                    send_list =  random.choice([f"歡迎加入煞氣幫<@{user_id}>！ 我知道加入煞氣幫是一個很令人興奮的事情，所以打錯字了", f"唉嘿～還想噁心龐董，換我噁心你，歡迎<@{user_id}>加入煞氣幫！！"])
+                    t = await msg.channel.send(send_list)
+                    await asyncio.sleep(5)
+                    await msg.delete()
+                    await t.delete()
+                    await msg.channel.send(f"<@859450432480608267>幫主!! <@{user_id}>剛剛加入<@&916322200976511066>了")
         except:
             pass
             # Embed edit
@@ -63,8 +84,8 @@ class Event(Cog_Extension):
                 # await asyncio.sleep(1)
                 user = await self.bot.fetch_user(859450432480608267)
                 # await asyncio.sleep(1)
-                # pfp = user.avatar_url
-                pfp = 'https://cdn.discordapp.com/avatars/859450432480608267/79186671bb2e5097c1d8a4f1fc4d2437.png'
+                pfp = user.avatar_url
+                # pfp = 'https://cdn.discordapp.com/avatars/859450432480608267/79186671bb2e5097c1d8a4f1fc4d2437.png'
                 print(pfp)
                 # await asyncio.sleep(1)
                 print(pfp)
@@ -72,22 +93,18 @@ class Event(Cog_Extension):
                 embed.set_image(url=(pfp))
                 await msg.channel.send(embed=embed)
 
-            elif len(msg.content)<8 and msg.author != self.bot.user:
-                if (msg.content[-2::]=='尊容') and (msg.content[0:-2] in  str(face_stack.keys())):
-                    for i in face_stack:
-                        if msg.content[0:-2] in i:
-                            user = await self.bot.fetch_user(face_stack[i])
-                            pfp = user.avatar_url
-                            embed=discord.Embed(title=f"{user.name}尊容", description='' , color=0xecce8b)
-                            embed.set_image(url=(pfp))
-                            t = await msg.channel.send(embed=embed)
-                            await asyncio.sleep(10)
-                            await t.delete()
-                            await msg.delete()
 
-
-
-
+            elif (msg.content[-2::]=='尊容') and (msg.content[0:-2] in  str(face_stack.keys()))and msg.author != self.bot.user:
+                for i in face_stack:
+                    if msg.content[0:-2] in i:
+                        user = await self.bot.fetch_user(face_stack[i])
+                        pfp = user.avatar_url
+                        embed=discord.Embed(title=f"{user.name}尊容", description='' , color=0xecce8b)
+                        embed.set_image(url=(pfp))
+                        t = await msg.channel.send(embed=embed)
+                        await asyncio.sleep(30)
+                        await t.delete()
+                        await msg.delete()
 
             elif "peko" in msg.content and msg.author != self.bot.user:
                 print('pass')
@@ -101,17 +118,30 @@ class Event(Cog_Extension):
                 await asyncio.sleep(5)
                 await bot_msg.delete()
                 await asyncio.sleep(4)
+            
+            elif 'tako'==msg.content and msg.author != self.bot.user:
+                await msg.delete()
+                # print('pass')
+                # print(os.listdir('tako/'))
+                await asyncio.sleep(1)
+                tako_show = random.choice(os.listdir('tako/'))
+                print(tako_show)
+
+                await  msg.channel.send(file=discord.File('./tako/'+tako_show))
+                
         except:
             pass
         
         # 噁心人專用
         if (msg.author.id in [395199000640225281])and msg.author != self.bot.user:
             send = random.randint(0,100)
+            await asyncio.sleep(1)
             if send in [0,10,20,30,40,50,60,70,80,90,100]:
-                choice = random.choice([False, False,False, False,False,'<:maplelovelovejump:884738023764398121>','🥳','👎',False, False,False, False,False, False])
+                choice = random.choice(['<:maplelovelovejump:884738023764398121>','🥳'])
                 await msg.add_reaction(choice)
             
             elif send in [5, 25 , 45, 65, 85]:
+                await asyncio.sleep(1)
                 choice = random.choice(['布里愛礦泉水', '7414團長' ,'座右銘-我還沒死爽','倒讚教主'])
                 await msg.reply(choice)
             
@@ -145,18 +175,22 @@ class Event(Cog_Extension):
         emoji = reaction.emoji
         # if (emoji =='👎' )and (user.id==395199000640225281):
         if (emoji =='👎' )and user != self.bot.user:
-            embed = discord.Embed(title = "", description = f"<@{user.id}>", color = 0x00ff00) #creates embed
-            embed.set_image(url = "https://cdn.discordapp.com/attachments/914780104704536576/918327038128046100/GG.jpg")
-            t = await self.channel.send(embed=embed)
-            await asyncio.sleep(10)
-            await t.delete()
+            send = random.randint(0,100)
+            if send in [0,10,20,30,40,50,60,70,80,90,100]:
+                embed = discord.Embed(title = "", description = f"<@{user.id}>", color = 0x00ff00) #creates embed
+                embed.set_image(url = "https://cdn.discordapp.com/attachments/914780104704536576/918327038128046100/GG.jpg")
+                t = await self.channel.send(embed=embed)
+                await asyncio.sleep(10)
+                await t.delete()
 
         elif (emoji =='🖕' ) and user != self.bot.user:
-            embed = discord.Embed(title = "", description = f"<@{user.id}>", color = 0x00ff00) #creates embed
-            embed.set_image(url = "https://cdn.discordapp.com/attachments/914780104704536576/918372755613818900/bad_nausea.png")
-            t = await self.channel.send(embed=embed)
-            await asyncio.sleep(10)
-            await t.delete()
+            send = random.randint(0,100)
+            if send in [0,10,20,30,40,50,60,70,80,90,100]:
+                embed = discord.Embed(title = "", description = f"<@{user.id}>", color = 0x00ff00) #creates embed
+                embed.set_image(url = "https://cdn.discordapp.com/attachments/914780104704536576/918372755613818900/bad_nausea.png")
+                t = await self.channel.send(embed=embed)
+                await asyncio.sleep(10)
+                await t.delete()
 
 
 
