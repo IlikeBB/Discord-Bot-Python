@@ -122,7 +122,7 @@ class Game(Cog_Extension):
             # 僅有使用者可以控制賭盤的exist
             # !commands dele game
             elif msg.content =="$del":
-                if (self.game_leader ==user or user.id==725714853872009216):
+                if (self.game_leader ==user or user.id==):
                     END_TIME =None
                     t = await msg.channel.send("Game已經刪除...")
                     await msg.delete()
@@ -278,7 +278,7 @@ class Lucky(Cog_Extension):
             # 僅有使用者可以控制賭盤的exist
             # !commands dele game
             elif msg.content =="$deldraw":
-                if (self.game_leader ==user or user.id==725714853872009216):
+                if (self.game_leader ==user or user.id==):
                     END_TIME =None
                     t = await msg.channel.send("抽獎已經刪除...")
                     await msg.delete()
@@ -299,7 +299,7 @@ class Lucky(Cog_Extension):
                     await asyncio.sleep(5)
                     await t.delete()
 
-            elif (msg.content == "$start") and (self.game_leader ==user or user.id==725714853872009216):
+            elif (msg.content == "$start") and (self.game_leader ==user or user.id==):
                 # if self.PLAY_MESSAGE_EDIT['Game_End_time']==False:
                     # self.PLAY_MESSAGE_EDIT['Game_End_time']=True
                     cache_msg = discord.utils.get(self.bot.cached_messages, id = self.game_init_msg.id)
