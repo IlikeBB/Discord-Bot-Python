@@ -18,20 +18,20 @@ class Event(Cog_Extension):
         content = msg.content
         message_channel = msg.channel.id
         #check onedrive
-        face_stack = {'數字人':556416924645588992 , 
-                        '布里阿布':395199000640225281, 
-                        '綿羊': 792664737837875200, 
-                        '沝阿水': 527396560116383761,
-                        '東東':637620548054155266,
-                        '微微':480388351166382124,
-                        '回鍋':855814708811399189,
-                        '阿如':531100369334304798,
-                        'CM':725714853872009216,
-                        '赤冥':541279740414263308,
-                        '謎漾':553145654130507776,
-                        '右手':539792067245768704}
+        face_stack = {'數字人': , 
+                        '布里阿布':, 
+                        '綿羊': , 
+                        '沝阿水': ,
+                        '東東':,
+                        '微微':,
+                        '回鍋':,
+                        '阿如':,
+                        'CM':,
+                        '赤冥':,
+                        '謎漾':,
+                        '右手':}
 
-        if msg.channel.id==914780104704536576:
+        if msg.channel.id==:
             if ("one" in msg.content) and (msg.author != self.bot.user):
                 await msg.channel.send('test2')
                 await asyncio.sleep(5)
@@ -39,33 +39,33 @@ class Event(Cog_Extension):
         keyword = ['None', 'None2', 'None3', 'None4']
         if "倒讚幫" == msg.content  and msg.author != self.bot.user:
             await msg.delete()
-            await msg.channel.send('<@&910509594109943838> 站起來!! 我們的敵人在上面 狠狠地踩爛他')
+            await msg.channel.send('<@&> 站起來!! 我們的敵人在上面 狠狠地踩爛他')
             await asyncio.sleep(5)
         # 龐克區
         try:
-            if msg.content=="煞氣幫" and (msg.author.id ==859450432480608267) and msg.author != self.bot.user:
+            if msg.content=="煞氣幫" and (msg.author.id ==) and msg.author != self.bot.user:
                 list = random.choice(['子民們站起來 龐董說話了!!','股東你好 請問有事嗎?','龐董你好.. 有事請tag 阿如, 阿布, CF', '又想踩阿水了嗎?'])
                 await msg.add_reaction('👍')
                 await msg.channel.send(list)
                 await asyncio.sleep(5)
 
-            elif msg.content=="煞氣幫" and (916322200976511066 in [y.id for y in user.roles])==False and msg.author != self.bot.user:
+            elif msg.content=="煞氣幫" and ( in [y.id for y in user.roles])==False and msg.author != self.bot.user:
                 list = random.choice(['該舔ㄍ廣播只有帥氣龐克幫主可以使用! 請加入煞氣幫! 大聲喊出! 「我要加入煞氣幫」'])
                 await msg.channel.send(list)
                 await asyncio.sleep(5)
                 await msg.delete()
             
-            elif msg.content=="煞氣幫" and (916322200976511066 in [y.id for y in user.roles])==True and msg.author != self.bot.user:
+            elif msg.content=="煞氣幫" and ( in [y.id for y in user.roles])==True and msg.author != self.bot.user:
                 list = random.choice(['請開始歌頌龐董贊歌 玉樹臨風 瀟灑倜儻...', '我龐董說甚麼都是對的 你們通通下去' ,'感謝龐董又幫台灣GDP上升了幾個百分點'])
                 await msg.channel.send(list)
                 await asyncio.sleep(5)
 
-            if msg.content=="我要加入煞氣幫" and (msg.author.id !=859450432480608267):
+            if msg.content=="我要加入煞氣幫" and (msg.author.id !=):
                 var = discord.utils.get(msg.guild.roles, name = "煞氣幫")
                 await msg.author.add_roles(var)
-                await msg.channel.send(f"<@859450432480608267>幫主!! <@{user_id}>剛剛加入<@&916322200976511066>了")
+                await msg.channel.send(f"<@>幫主!! <@{user_id}>剛剛加入<@&>了")
             
-            elif (len(msg.content)==7) and (msg.author.id !=859450432480608267):
+            elif (len(msg.content)==7) and (msg.author.id !=):
                 if ("我要加" in msg.content) and ("幫" in msg.content):
                     var = discord.utils.get(msg.guild.roles, name = "煞氣幫")
                     await msg.author.add_roles(var)
@@ -74,7 +74,7 @@ class Event(Cog_Extension):
                     await asyncio.sleep(5)
                     await msg.delete()
                     await t.delete()
-                    await msg.channel.send(f"<@859450432480608267>幫主!! <@{user_id}>剛剛加入<@&916322200976511066>了")
+                    await msg.channel.send(f"<@>幫主!! <@{user_id}>剛剛加入<@&>了")
         except:
             pass
             # Embed edit
@@ -82,7 +82,7 @@ class Event(Cog_Extension):
             if msg.content =='龐克尊容'and msg.author != self.bot.user:
                 # await msg.channel.send("該功能測試中 可能會有點延遲")
                 # await asyncio.sleep(1)
-                user = await self.bot.fetch_user(859450432480608267)
+                user = await self.bot.fetch_user()
                 # await asyncio.sleep(1)
                 pfp = user.avatar_url
                 # pfp = 'https://cdn.discordapp.com/avatars/859450432480608267/79186671bb2e5097c1d8a4f1fc4d2437.png'
@@ -133,7 +133,7 @@ class Event(Cog_Extension):
             pass
         
         # 噁心人專用
-        if (msg.author.id in [395199000640225281])and msg.author != self.bot.user:
+        if (msg.author.id in [])and msg.author != self.bot.user:
             send = random.randint(0,100)
             await asyncio.sleep(1)
             if send in [0,10,20,30,40,50,60,70,80,90,100]:
@@ -160,7 +160,7 @@ class Event(Cog_Extension):
 
 
         # 管理綿羊開車頻道用
-        if msg.channel.id==903248239095062538:
+        if msg.channel.id==:
             if (("http" in msg.content)==False) and msg.author != self.bot.user:
                 await msg.delete()
 
@@ -170,7 +170,7 @@ class Event(Cog_Extension):
     @commands.Cog.listener()
     async def on_reaction_add(self, reaction, user):
         await asyncio.sleep(1)
-        self.channel = self.bot.get_channel(406283404221612054)
+        self.channel = self.bot.get_channel()
 
         emoji = reaction.emoji
         # if (emoji =='👎' )and (user.id==395199000640225281):
