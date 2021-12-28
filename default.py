@@ -1,6 +1,10 @@
 import discord
 import json, asyncio, datetime, random, os
+import firebase_admin
 from discord.ext import commands
+from core.firebase_config import *
+
+
 
 with open('./setting.json', 'r', encoding='utf8') as jfile:
     jdata = json.load(jfile)
