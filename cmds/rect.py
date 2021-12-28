@@ -21,7 +21,7 @@ class Task(Cog_Extension):
                         if self.counter==1:
                             break
                         self.counter = 1
-                        self.channel = self.bot.get_channel()
+                        self.channel = self.bot.get_channel(406283404221612054)
                         await self.channel.send(f"<@&854675831548936212> <@&854676138772660226> <@&911040145698979872><@&911040436922097725>各位乖寶寶們已經 {now_time[0:2]} : {now_time[2::]}了！！！！準備跳棋囉！！！！")
                         await asyncio.sleep(5)
                     elif  ((now_time =='2101') or (now_time=='1901') or (now_time=='1201')) and (self.counter!=0):
@@ -36,7 +36,7 @@ class Task(Cog_Extension):
                         if self.counter2==1:
                             break
                         self.counter2 = 1
-                        self.channel = self.bot.get_channel()
+                        self.channel = self.bot.get_channel(406283404221612054)
                         await self.channel.send("各位寶寶們要記得黃金馬車的點名喔！！！！！")
                         await asyncio.sleep(5)
 
