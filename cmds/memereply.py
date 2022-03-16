@@ -26,14 +26,14 @@ class MeMe(Cog_Extension):
                 await asyncio.sleep(30)
                 await afarid.delete()
 
-            if ("我就爛" in msg.content) and (msg.author != self.bot.user):
+            if ("我就爛" in msg.content) and (len(msg.content)==3) and (msg.author != self.bot.user) and (("http" in msg.content)==False):
                 await asyncio.sleep(1)
 
                 mybadbad = await  msg.channel.send(file=discord.File('./img/mybadbad.jpg'))
                 await asyncio.sleep(30)
                 await mybadbad.delete()
 
-            if (msg.content.startswith("早安")) and (msg.author != self.bot.user):
+            if (msg.content.startswith("早安")) and (len(msg.content)==2) and (msg.author != self.bot.user) and (("http" in msg.content)==False):
                 await asyncio.sleep(1)
                 await msg.delete()
                 list = random.choice(['./img/yagoomorning.webp','./img/uglyGG.png'])
@@ -41,28 +41,28 @@ class MeMe(Cog_Extension):
                 await asyncio.sleep(30)
                 await yagoomorning.delete()
 
-            if (msg.content.startswith("晚安")) and (msg.author != self.bot.user):
+            if (msg.content.startswith("晚安")) and (len(msg.content)==2) and (msg.author != self.bot.user) and (("http" in msg.content)==False):
                 await asyncio.sleep(1)
                 await msg.delete()
                 yagoonight = await  msg.channel.send(file=discord.File('./img/yagoonight.webp'))
                 await asyncio.sleep(30)
                 await yagoonight.delete()
 
-            if (msg.content.startswith("午安")) and (msg.author != self.bot.user):
+            if (msg.content.startswith("午安")) and (len(msg.content)==2) and (msg.author != self.bot.user) and (("http" in msg.content)==False):
                 await asyncio.sleep(1)
                 await msg.delete()
                 yagooafternoon = await  msg.channel.send(file=discord.File('./img/yagooafternoon.webp'))
                 await asyncio.sleep(30)
                 await yagooafternoon.delete()
 
-            if ("老鼠" in msg.content or "勞贖" in msg.content) and (msg.author != self.bot.user):
+            if ("老鼠" in msg.content or "勞贖" in msg.content) and (len(msg.content)==2) and (msg.author != self.bot.user):
                 await asyncio.sleep(1)
 
                 laushu = await  msg.channel.send(file=discord.File('./img/laushu.jpeg'))
                 await asyncio.sleep(30)
                 await laushu.delete()
 
-            if ("歸剛" in msg.content) and (msg.author != self.bot.user):
+            if ("歸剛" in msg.content) and (len(msg.content)==2) and (msg.author != self.bot.user):
                 await asyncio.sleep(1)
 
                 allday = await  msg.channel.send(file=discord.File('./img/allday.png'))
@@ -76,9 +76,9 @@ class MeMe(Cog_Extension):
                 await asyncio.sleep(30)
                 await iwanttoseeblood.delete()
 
-            if (("<:" in msg.content)==False) and (("peko" in msg.content) or ("Peko" in msg.content)) and (msg.author != self.bot.user):
+            if ((":" in msg.content)==False) and (("peko" in msg.content) or ("Peko" in msg.content)) and (msg.author != self.bot.user):
                 await asyncio.sleep(1)
-                await msg.delete()
+                # await msg.delete()
                 list = random.choice(os.listdir('peko/'))
                 embed=discord.Embed(title="PEKO～ PEKO～", description='HA↗HA↗HA↗～' , color=0xecce8b)
                 if "gif" in list:

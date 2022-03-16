@@ -105,6 +105,7 @@ class Point_Listener(Cog_Extension):
         message_channel = msg.channel.id
 
         if (msg.content.startswith("$pt") or msg.content.startswith("$PT"))and (msg.author != self.bot.user):
+            print('Search Finished!!!!')
             await asyncio.sleep(1)
             ID_values = self.ref.child("ID").get()
             ID_stack = [i for i in ID_values]

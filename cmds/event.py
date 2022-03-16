@@ -1,5 +1,6 @@
 import discord, random, json, datetime, asyncio, os
 from discord.ext import commands
+from discord.utils import get
 from core.classes import Cog_Extension
 from random import randint
 import time
@@ -18,13 +19,44 @@ class Event(Cog_Extension):
         content = msg.content
         message_channel = msg.channel.id
         #check onedrive
+        # print(msg.content)
+        if ("身份查詢"==msg.content or "role查詢"==msg.content or "Role查詢"==msg.content) and msg.author!=self.bot.user:
+            await msg.delete()
+            guild_ = msg.guild
+            # print(guild_)
+            embed=discord.Embed(title='', description=f'<@{user.id}> 身份組查詢',color=0xecce8b)
+            for i in user.roles:
+                if i.name =='@everyone' or i.name=='Bot' or i.name=='Join':
+                    pass
+                else:
+                    embed.add_field(name = f"{i.name}", inline=True, value=f"目前有{len(i.members)}人")
+            rolecheck = await msg.channel.send(embed=embed)
+            await asyncio.sleep(30)
+            await rolecheck.delete()
+        
+        if '成員' in msg.content and msg.content.startswith('<@&'):
+            role_id = msg.content.replace('<@&','').replace('>','').replace('成員','')
+            guild_ = msg.guild
+            # print(guild_)
+            role_ = get(guild_.roles, id=int(role_id))
+            embed=discord.Embed(title='', description=f'{role_} -  身份組查詢',color=0xecce8b)
+            members_list = ''
+            for idx, i in enumerate(role_.members):
+                # print('idx', idx)
+                if (idx%10==0 or (idx)==(len(role_.members)-1)) and idx!=0:
+                    embed.add_field(name = f"----------", inline=True, value=members_list)
+                    members_list = ''
+                else:
+                    if i.nick!=None:
+                        members_list = members_list + (str(i.nick)+'\n')
+                    else:
+                        members_list = members_list + (str(i.name)+'\n')
+            rolecheck = await msg.channel.send(embed=embed)
+            await asyncio.sleep(120)
+            await msg.delete()
+            await rolecheck.delete() 
 
-        if msg.channel.id==914780104704536576:
-            if ("one" in msg.content) and (msg.author != self.bot.user):
-                await msg.channel.send('test2')
-                await asyncio.sleep(5)
 
-        keyword = ['None', 'None2', 'None3', 'None4']
         if "倒讚幫" == msg.content  and msg.author != self.bot.user:
             await msg.delete()
             await msg.channel.send('<@&910509594109943838> 站起來!! 我們的敵人在上面 狠狠地踩爛他')
@@ -49,7 +81,7 @@ class Event(Cog_Extension):
                 await msg.channel.send(list)
                 await asyncio.sleep(5)
 
-            if msg.content=="我要加入煞氣幫" and (msg.author.id !=859450432480608267):
+            if msg.content=="我要加入煞氣幫" and (msg.author.id !=859450432480608267) and ('916322200976511066' not in str(user.roles)):
                 var = discord.utils.get(msg.guild.roles, name = "煞氣幫")
                 await msg.author.add_roles(var)
                 await msg.channel.send(f"<@859450432480608267>幫主!! <@{user_id}>剛剛加入<@&916322200976511066>了")
@@ -57,6 +89,8 @@ class Event(Cog_Extension):
             elif msg.content=="我要加入煞氣幫" and (msg.author.id ==859450432480608267):
                 await msg.channel.send(f"<@859450432480608267>幫主... 你已經是煞氣幫的幫主了喔")
 
+            elif msg.content=="我要加入煞氣幫":
+                await msg.channel.send(f"<@{user.id}>... 你已經是煞氣幫的會員了喔")
         if "中指幫" in msg.content:
             if msg.content=="我要加入中指幫":
                 var = discord.utils.get(msg.guild.roles, name = "中指幫")
@@ -98,11 +132,14 @@ class Event(Cog_Extension):
             await msg.channel.send(embed=embed)
         elif (msg.content[-2::]=="尊容")and msg.author != self.bot.user:
             try:
-                
-                photo_id = int(msg.content[3:21])
+                if '<@!' in msg.content:
+                    tag_id = msg.content.replace('<@!','').replace('>','').replace('尊容','')
+                else:
+                    tag_id = msg.content.replace('<@','').replace('>','').replace('尊容','')
+                photo_id = int(tag_id)
                 user = await self.bot.fetch_user(photo_id)
                 pfp = user.avatar_url
-                embed=discord.Embed(title='', description=f'<@{user.id}>'+' 尊容' , color=0xecce8b)
+                embed=discord.Embed(title='', description=f'<@{int(tag_id)}>'+' 尊容' , color=0xecce8b)
                 embed.set_image(url=(pfp))
                 t = await msg.channel.send(embed=embed)
                 await asyncio.sleep(10)
@@ -112,22 +149,31 @@ class Event(Cog_Extension):
                 
             except:
                 t = await msg.channel.send('格式有誤. {@tage}尊容')
+                print(msg.content)
                 await asyncio.sleep(30)
                 await t.delete()
                 await msg.delete()
         
         # 噁心人專用
-        if (msg.author.id in [395199000640225281])and msg.author != self.bot.user:
-            send = random.randint(0,100)
-            await asyncio.sleep(1)
-            if send in [0,10,20,30,40,50,60,70,80,90,100]:
-                choice = random.choice(['<:maplelovelovejump:884738023764398121>','🥳'])
-                await msg.add_reaction(choice)
-            
-            elif send in [5, 35 , 65, 85]:
-                await asyncio.sleep(1)
-                choice = random.choice(['布里愛礦泉水', '7414團長' ,'座右銘-我還沒死爽','倒讚教主' ,'你知道不能濫用權力嘛?', 'ㄏㄚˋ'])
-                await msg.reply(choice)
+        # if (msg.author.id in [395199000640225281])and msg.author != self.bot.user:
+        #     send = random.randint(0,100)
+        #     await asyncio.sleep(1)
+        #     if send in [0,10,20,30,40,50,60,70,80,90,100]:
+        #         choice = random.choice(['<:maplelovelovejump:884738023764398121>','🥳'])
+        #         await msg.add_reaction(choice)
+                
+        # if (msg.author.id in [556416924645588992])and msg.author != self.bot.user:
+        #     send = random.randint(0,100)
+        #     print(send)
+        #     await asyncio.sleep(1)
+        #     if send in [0, 5,10, 15,20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]:
+        #         choice = random.choice(['🖕','👎','<:74143:890242279791546429>'])
+        #         await msg.add_reaction(choice)
+                
+            # elif send in [5, 35 , 65, 85]:
+            #     await asyncio.sleep(1)
+            #     choice = random.choice(['布里愛礦泉水', '7414團長' ,'座右銘-我還沒死爽','倒讚教主' ,'你知道不能濫用權力嘛?', 'ㄏㄚˋ'])
+            #     await msg.reply(choice)
             
 
         # 管理綿羊開車頻道用
